@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 TOTP=$(keepassxc-cli show --totp ~/Documents/Passwords.kdbx UdG)
 

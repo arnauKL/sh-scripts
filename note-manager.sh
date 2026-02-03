@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 NOTES_DIRECTORY="$HOME/Notes/"
 

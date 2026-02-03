@@ -26,5 +26,5 @@ br_percent=$(( br_level / 4 )) # 0 to 100
 # notification
 notify-send -h int:value:$br_percent \
     -h string:x-canonical-private-synchronous:brightness \
-    "${br_percent}%"
+    " 󰃟  ${br_percent}%"
 
