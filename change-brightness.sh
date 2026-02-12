@@ -3,7 +3,6 @@
 # Wrapper to set brightness and show a notification
 # usage: "sh change-brightness.sh up/down"
 
-
 # change brightness with brightnessctl
 case "$1" in
     up)
@@ -27,4 +26,3 @@ br_percent=$(( br_level / 4 )) # 0 to 100
 notify-send -h int:value:$br_percent \
     -h string:x-canonical-private-synchronous:brightness \
     " 󰃟  ${br_percent}%"
-
