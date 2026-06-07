@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# requires wlr-randr
+
 INTERNAL="eDP-1"
 
 case "$1" in
@@ -24,6 +26,6 @@ case "$1" in
     ;;
 
     *)
-        echo 'usage: ' $0 ' [on/off(/toggle wayland only)]'
+        echo 'usage: ' $0 ' [on/off/toggle] (wayland only)'
     ;;
 esac

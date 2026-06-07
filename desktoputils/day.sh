@@ -1,26 +1,18 @@
 #!/usr/bin/env sh
 
-# turn from dark into light mode
-LIGHT_BG="$HOME/Pictures/wallpapers/palmtree.JPG"
+# configured to work on arch + labwc
 
-ALACRITTY_THEME="$HOME/.config/alacritty/current-theme.toml"
-LIGHT_ALACRITTY_THEME="$HOME/.config/alacritty-theme/themes/ashes_light.toml"
+# bg (swaybg)
+#pkill swaybg; swaybg -i "$(cat /var/tmp/selected-bg)" -m fill &
+#pkill swaybg && swaybg -c "#e0e0e0" &
 
-NIRI_THEME="$HOME/.config/niri/color.kdl"
+gsettings set org.gnome.desktop.interface color-scheme "prefer-light"
+gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"
 
-# makes smooth transition
-niri msg action do-screen-transition
+# foot
+CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/foot/foot.ini"
+sed -i 's/initial-color-theme=[0-9]*/initial-color-theme=2/' "$CONFIG"
 
-# Handles both GTK and Qt
-dconf write /org/gnome/desktop/interface/color-scheme "\"prefer-light\""
+pkill -u "$USER" --signal=SIGUSR2 ^foot$
 
-# Alacritty theme
-cp $LIGHT_ALACRITTY_THEME $ALACRITTY_THEME
-
-
-# Niri Background
-echo 'layout { background-color "#e0e0e0"; }' > "$NIRI_THEME"
-
-# Only switch bg if swaybg is running
-echo $LIGHT_BG > /var/tmp/selected-bg
-pkill swaybg && swaybg -i "$(cat /var/tmp/selected-bg)" -m fill
+notify-send "Light mode"

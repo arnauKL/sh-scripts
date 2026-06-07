@@ -1,21 +1,21 @@
 #!/usr/bin/env sh
 
-# turn from light to dark mode
-DARK_BG="$HOME/Pictures/wallpapers/IMG_6688.JPEG"
+# configured to work on arch + labwc
 
-ALACRITTY_THEME="$HOME/.config/alacritty/current-theme.toml"
-DARK_ALACRITTY_THEME="$HOME/.config/alacritty-theme/themes/zenburn.toml"
+# bg (swaybg)
+#pkill swaybg; swaybg -i "$(cat /var/tmp/selected-bg)" -m fill &
+#pkill swaybg; swaybg -c "#5a5a5a" & # neutral gray-ish
+#pkill swaybg && swaybg -c "#3c3836" &
 
-NIRI_THEME="$HOME/.config/niri/color.kdl"
+gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 
-niri msg action do-screen-transition
-dconf write /org/gnome/desktop/interface/color-scheme "\"prefer-dark\""
+#pgrep -x waybar && pkill waybar && waybar &
 
-cp $DARK_ALACRITTY_THEME $ALACRITTY_THEME
+# foot
+CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/foot/foot.ini"
+sed -i 's/initial-color-theme=[0-9]*/initial-color-theme=1/' "$CONFIG"
 
-# Niri Background
-echo 'layout { background-color "#2a2a2a"; }' > "$NIRI_THEME"
+pkill -u "$USER" --signal=SIGUSR1 ^foot$
 
-# Only switch bg if swaybg is running
-echo $DARK_BG > /var/tmp/selected-bg
-pkill swaybg && swaybg -i "$(cat /var/tmp/selected-bg)" -m fill
+notify-send "Dark mode"
